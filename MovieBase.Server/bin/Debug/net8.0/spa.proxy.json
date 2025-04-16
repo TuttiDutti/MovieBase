@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:50699",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\Admin\\source\\repos\\MovieBase\\MovieBase.Server\\..\\moviebase.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

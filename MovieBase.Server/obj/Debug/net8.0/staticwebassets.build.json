@@ -1,0 +1,24 @@
+{
+  "Version": 1,
+  "Hash": "9AJJh5xq0fboYuo3oZrvy6XUgCyv8W5h3NlsCHQWvbw=",
+  "Source": "MovieBase.Server",
+  "BasePath": "_content/MovieBase.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\Admin\\source\\repos\\MovieBase\\moviebase.client\\moviebase.client.esproj",
+      "Version": 2,
+      "Source": "moviebase.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
