@@ -1,5 +1,6 @@
 using MovieBase.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using MovieBase.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString")));
+builder.Services.AddHttpClient<TmdbService>();
 
 var app = builder.Build();
 
