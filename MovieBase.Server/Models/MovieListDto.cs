@@ -1,14 +1,10 @@
 ﻿namespace MovieBase.Server.Models
 {
-    public class MovieDto
+    public class MovieListDto
     {
         public int TmdbId { get; set; }
         public string Title { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
         public string PosterUrl { get; set; } = string.Empty;
-        public string ReleaseDate { get; set; } = string.Empty;
-        public int Runtime { get; set; }
         public List<string> Genres { get; set; } = new();
-
     }
 }
