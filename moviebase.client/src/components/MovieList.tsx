@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { MovieListDto } from "../types"; 
+import { useNavigate } from "react-router-dom";
 
 const MovieList = () => {
     const [movies, setMovies] = useState<MovieListDto[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
        
@@ -13,15 +15,13 @@ const MovieList = () => {
                 const response = await fetch("/api/movie/list");
                 if (!response.ok) {
                     const text = await response.text();
-                    console.error("?? Backend zwróci³ b³¹d:", response.status, text);
+                    console.error("Backend error:", response.status, text);
                     return;
                 }
                 const data = await response.json();
-
-                console.log("Response z backendu:", data);
                 setMovies(data); 
             } catch (error) {
-                console.error("B³¹d podczas pobierania filmów", error);
+                console.error("Error occured: ", error);
             } finally {
                 setIsLoading(false);
             }
@@ -44,7 +44,7 @@ const MovieList = () => {
     if (isLoading) return <p>Loading...</p>;
 
     return (
-        <div>
+        <div className="page">
             <h1 className="title">Movie list</h1>
             <div className="search">
                 <input className="searchbar" type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={(e) => {if (e.key === "Enter") handleSearch();}}></input>
@@ -57,7 +57,7 @@ const MovieList = () => {
 
             <ul className="movie-grid">
                 {movies.map((movie) => (
-                    <li key={movie.tmdbId} className="movie-card">
+                    <li key={movie.tmdbId} className="movie-card" value={movie.tmdbId} onClick={() => navigate(`/movie/${movie.tmdbId}`)} style={{ cursor: "pointer" }}>
                         <img src={movie.posterUrl || "/no-img.png"} alt={movie.title} width={100} className="movie-poster" />
                         <div className="movie-title">{movie.title}</div>
                         <div className="movie-genres">{movie.genres.slice(0, 2).map((genre, index) => (

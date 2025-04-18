@@ -1,13 +1,27 @@
 ﻿#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
     text-align: center;
+    width: 100%;
+    height:;
 }
 
 th, td {
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.page {
+    width:70%;
+    
+    padding-left: 5rem;
+    padding-right: 5rem;
+    box-shadow: 11px 0px 12px #272424, -11px 0px 6px #272424;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 @media (max-width: 1024px) {
@@ -57,6 +71,7 @@ th, td {
     justify-content: flex-end;
     padding: 2rem;
     margin-bottom: 2em;
+    width: 100%;
 }
 .searchbar {
     font-size: 24px;
@@ -71,25 +86,53 @@ th, td {
     transition: border-color 0.2s ease;
     box-shadow: inset 3px 3px 6px #2a2a2a, inset -3px -3px 6px #4d4d4d;
 }
-.search-icon {
-    align-content: center;
-    background-color: #453f3f;
-    box-shadow: 4px 4px 6px #272424, -1px -1px 6px #272424;
-    padding-bottom: 0;
-    padding-top: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: auto;
-    color: #FFECCC;
-    transition: box-shadow 0.2s ease;
-}
-    .search-icon:hover {
-        box-shadow: inset 3px 3px 6px #272424, inset -3px -3px 6px #453f3f;
-        border: none;
-    }
+
     .searchbar:focus,
     .searchbar:focus-visible {
         border-color: #F25F5C !important;
         outline: none;
         box-shadow: none;
     }
+
+.movieTitle{
+    align-self: self-start;
+}
+
+.back{
+    display:flex;
+    height: 2.5rem;
+    align-items: center;
+    text-align: center;
+}
+.back-text{
+    align-self:center;
+}
+
+.material-symbols-outlined{
+    align-content: center;
+}
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+.movie-details {
+    display: flex;
+    width: 100%;
+    margin-top: 5rem;
+    align-items:center;
+}
+
+.poster-movie{
+    height: auto;
+    width: 20rem;
+    margin-right: 5rem;
+}
+.desc{
+    margin:0;
+    margin-top:2rem;
+}
+.description {
+
+}
