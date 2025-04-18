@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nowy Profil",
+    "Projects": [
+      {
+        "Path": "moviebase.client\\moviebase.client.esproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "MovieBase.Server\\MovieBase.Server.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

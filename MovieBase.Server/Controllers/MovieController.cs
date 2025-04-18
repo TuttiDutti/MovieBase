@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieBase.Server.Models;
 using MovieBase.Server.Services;
+using System.Text;
 using System.Text.Json;
 
 namespace MovieBase.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MovieController : Controller
     {
         private TmdbService _tmdbService;
@@ -16,21 +17,24 @@ namespace MovieBase.Server.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> List([FromQuery] string? q)
         {
+            
             JsonDocument result;
             var genreDict = await _tmdbService.GetGenresAsync();
             try
             {
                 if (string.IsNullOrEmpty(q))
                 {
-                     result = await _tmdbService.GetPopularMoviesAsync();
+                    
+                    result = await _tmdbService.GetPopularMoviesAsync();
                 }
                 else
                 {
                      result = await _tmdbService.SearchMovieAsync(q);
                    
                 }
+                
                 var results = result.RootElement.GetProperty("results");
-
+                
                 var movies = results.EnumerateArray().Select(movie => new MovieListDto
                 {
                     TmdbId = movie.GetProperty("id").GetInt32(),
@@ -42,13 +46,15 @@ namespace MovieBase.Server.Controllers
                         .Select(x => genreDict.ContainsKey(x.GetInt32()) ? genreDict[x.GetInt32()] : "")
                         .Where(g => !string.IsNullOrEmpty(g))
                         .ToList() :new List<string>()
-                });
+                }).ToList();
 
-
+                
                 return Ok(movies);
+               
             }
             catch (Exception ex)
             {
+               
                 return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
             }
         }
