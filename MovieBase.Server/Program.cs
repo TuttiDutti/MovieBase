@@ -1,7 +1,9 @@
 using MovieBase.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using MovieBase.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 
@@ -10,7 +12,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString")));
+builder.Services.AddHttpClient<TmdbService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin() // frontend Vite
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -24,6 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

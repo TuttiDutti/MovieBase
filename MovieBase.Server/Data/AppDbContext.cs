@@ -13,4 +13,5 @@ namespace MovieBase.Server.Data
         public DbSet<FavoriteMovie> FavoriteMovies { get; set; }
 
     }
+
 }
