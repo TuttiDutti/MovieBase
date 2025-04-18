@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieBase.Server.Models;
 using MovieBase.Server.Services;
+using System.Text;
 using System.Text.Json;
 
 namespace MovieBase.Server.Controllers
@@ -16,14 +17,14 @@ namespace MovieBase.Server.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> List([FromQuery] string? q)
         {
-            Console.WriteLine($"[BACKEND] Start list — q = '{q}'");
+            
             JsonDocument result;
             var genreDict = await _tmdbService.GetGenresAsync();
             try
             {
                 if (string.IsNullOrEmpty(q))
                 {
-                    Console.WriteLine("[BACKEND] Pobieram popularne filmy...");
+                    
                     result = await _tmdbService.GetPopularMoviesAsync();
                 }
                 else
@@ -31,9 +32,9 @@ namespace MovieBase.Server.Controllers
                      result = await _tmdbService.SearchMovieAsync(q);
                    
                 }
-                Console.WriteLine("[BACKEND] JSON pobrany.");
+                
                 var results = result.RootElement.GetProperty("results");
-                Console.WriteLine("[BACKEND] Przetwarzam filmy...");
+                
                 var movies = results.EnumerateArray().Select(movie => new MovieListDto
                 {
                     TmdbId = movie.GetProperty("id").GetInt32(),
@@ -47,13 +48,13 @@ namespace MovieBase.Server.Controllers
                         .ToList() :new List<string>()
                 }).ToList();
 
-                Console.WriteLine($"[BACKEND] Zwracam {movies.Count} filmów.");
+                
                 return Ok(movies);
+               
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[BACKEND] WYJĄTEK: {ex.Message}");
-                Console.WriteLine($"[BACKEND] StackTrace: {ex.StackTrace}");
+               
                 return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
             }
         }

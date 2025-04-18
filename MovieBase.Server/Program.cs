@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
                                 .AllowAnyMethod();
                       });
 });
-
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 var app = builder.Build();
 
 app.UseDefaultFiles();
